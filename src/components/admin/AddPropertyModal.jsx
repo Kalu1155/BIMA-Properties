@@ -63,7 +63,7 @@ export default function AddPropertyModal({
         <div className="bg-white w-full max-w-6xl rounded-3xl shadow-2xl overflow-hidden">
 
           {/* HEADER */}
-          <div className="flex items-center justify-between border-b p-6 sticky top-0 bg-white z-10">
+          <div className="flex items-center justify-between border-b border-[#e5e7eb] p-6 sticky top-0 bg-white z-10">
 
             <div>
               <h2 className="text-2xl font-bold">
@@ -105,7 +105,7 @@ export default function AddPropertyModal({
                   value={form.title}
                   onChange={handleChange}
                   placeholder="Luxury Duplex"
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                 />
               </div>
 
@@ -121,7 +121,7 @@ export default function AddPropertyModal({
                   value={form.price}
                   onChange={handleChange}
                   placeholder="₦500,000,000"
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                 />
               </div>
 
@@ -137,7 +137,7 @@ export default function AddPropertyModal({
                   value={form.location}
                   onChange={handleChange}
                   placeholder="Abuja"
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                 />
               </div>
 
@@ -151,7 +151,7 @@ export default function AddPropertyModal({
                   name="type"
                   value={form.type}
                   onChange={handleChange}
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                 >
                   <option value="">Select Type</option>
                   <option>Duplex</option>
@@ -175,7 +175,7 @@ export default function AddPropertyModal({
                     name="bedrooms"
                     value={form.bedrooms}
                     onChange={handleChange}
-                    className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                    className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                   />
                 </div>
 
@@ -189,7 +189,7 @@ export default function AddPropertyModal({
                     name="bathrooms"
                     value={form.bathrooms}
                     onChange={handleChange}
-                    className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                    className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                   />
                 </div>
 
@@ -205,7 +205,7 @@ export default function AddPropertyModal({
                   name="status"
                   value={form.status}
                   onChange={handleChange}
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                 >
                   <option>Active</option>
                   <option>Pending</option>
@@ -230,7 +230,7 @@ export default function AddPropertyModal({
                   value={form.description}
                   onChange={handleChange}
                   placeholder="Write property description..."
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black resize-none"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb] resize-none"
                 />
               </div>
 
@@ -246,7 +246,7 @@ export default function AddPropertyModal({
                   value={form.amenities}
                   onChange={handleChange}
                   placeholder="Pool, Parking, Gym..."
-                  className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                  className="w-full mt-2 border rounded-xl p-4 outline-none border border-[#e5e7eb]"
                 />
               </div>
 

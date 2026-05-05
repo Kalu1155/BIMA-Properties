@@ -72,7 +72,7 @@ export default function PropertiesPage() {
       </div>
 
       {/* SEARCH + FILTER */}
-      <div className="bg-white p-5 rounded-2xl border border-[#e5e7eb] shadow-sm mb-6">
+      <div className="bg-white p-5 rounded-2xlbg-[#3f5873] shadow-sm mb-6">
 
         <div className="flex flex-col md:flex-row gap-4">
 

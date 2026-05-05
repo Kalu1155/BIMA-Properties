@@ -62,7 +62,7 @@ export default function AgentsPage() {
 
         <button
           onClick={() => setOpenModal(true)}
-          className="bg-black text-white px-5 py-3 rounded-xl flex items-center gap-2 hover:opacity-90 transition"
+          className="bg-[#3f5873] text-white px-5 py-3 rounded-xl flex items-center gap-2 hover:opacity-90 transition"
         >
           <LuPlus size={18} />
           Add Agent
@@ -71,9 +71,9 @@ export default function AgentsPage() {
       </div>
 
       {/* SEARCH */}
-      <div className="bg-white rounded-2xl border shadow-sm p-5 mb-6">
+      <div className="bg-white rounded-2xl border border-[#e5e7eb] shadow-sm p-5 mb-6">
 
-        <div className="flex items-center border rounded-xl px-4">
+        <div className="flex items-center border border-[#e5e7eb] rounded-xl px-4">
 
           <LuSearch size={18} className="text-gray-400" />
 
@@ -90,13 +90,13 @@ export default function AgentsPage() {
       </div>
 
       {/* TABLE */}
-      <div className="bg-white rounded-2xl border shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl border border-[#e5e7eb] shadow-sm overflow-hidden">
 
         <div className="overflow-x-auto">
 
           <table className="w-full">
 
-            <thead className="bg-gray-50 border-b">
+            <thead className="bg-gray-50 border-b border-[#e5e7eb]">
 
               <tr>
 
@@ -130,7 +130,7 @@ export default function AgentsPage() {
 
                 <tr
                   key={agent.id}
-                  className="border-b hover:bg-gray-50 transition"
+                  className="border-b border-[#e5e7eb] hover:bg-gray-50 transition"
                 >
 
                   {/* AGENT */}

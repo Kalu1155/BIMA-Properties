@@ -47,7 +47,7 @@ export default function SingleAgentPage() {
     <div className="space-y-8">
 
       {/* TOP SECTION */}
-      <div className="bg-white rounded-3xl border shadow-sm p-6">
+      <div className="bg-white rounded-3xl  border border-[#e5e7eb] shadow-sm p-6">
 
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
 
@@ -130,7 +130,7 @@ export default function SingleAgentPage() {
       {/* STATS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-        <div className="bg-white rounded-2xl border p-6 shadow-sm">
+        <div className="bg-white rounded-2xl  border border-[#e5e7eb] p-6 shadow-sm">
 
           <p className="text-gray-500 text-sm">
             Total Properties
@@ -142,7 +142,7 @@ export default function SingleAgentPage() {
 
         </div>
 
-        <div className="bg-white rounded-2xl border p-6 shadow-sm">
+        <div className="bg-white rounded-2xl  border border-[#e5e7eb] p-6 shadow-sm">
 
           <p className="text-gray-500 text-sm">
             Approved Listings
@@ -154,7 +154,7 @@ export default function SingleAgentPage() {
 
         </div>
 
-        <div className="bg-white rounded-2xl border p-6 shadow-sm">
+        <div className="bg-white rounded-2xl  border border-[#e5e7eb] p-6 shadow-sm">
 
           <p className="text-gray-500 text-sm">
             Pending Listings
@@ -169,7 +169,7 @@ export default function SingleAgentPage() {
       </div>
 
       {/* PROPERTIES */}
-      <div className="bg-white rounded-3xl border shadow-sm p-6">
+      <div className="bg-white rounded-3xl  border border-[#e5e7eb] shadow-sm p-6">
 
         <div className="flex items-center justify-between mb-8">
 
@@ -192,7 +192,7 @@ export default function SingleAgentPage() {
 
             <div
               key={property.id}
-              className="border rounded-3xl overflow-hidden hover:shadow-xl transition"
+              className=" border border-[#e5e7eb] rounded-3xl overflow-hidden hover:shadow-xl transition"
             >
 
               {/* IMAGE */}

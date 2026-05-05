@@ -42,7 +42,7 @@ export default function AddAgentModal({
         <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden">
 
           {/* HEADER */}
-          <div className="flex items-center justify-between p-6 border-b">
+          <div className="flex items-center justify-between p-6  border-b border-[#e5e7eb]">
 
             <div>
               <h2 className="text-2xl font-bold">
@@ -81,7 +81,7 @@ export default function AddAgentModal({
                 value={form.fullname}
                 onChange={handleChange}
                 placeholder="John Doe"
-                className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                className="w-full mt-2 border border-[#e5e7eb] rounded-xl p-4 outline-none "
               />
             </div>
 
@@ -97,7 +97,7 @@ export default function AddAgentModal({
                 value={form.email}
                 onChange={handleChange}
                 placeholder="john@example.com"
-                className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                className="w-full mt-2 border border-[#e5e7eb] rounded-xl p-4 outline-none focus:border-black"
               />
             </div>
 
@@ -113,7 +113,7 @@ export default function AddAgentModal({
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="+234..."
-                className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                className="w-full mt-2 border border-[#e5e7eb] rounded-xl p-4 outline-none "
               />
             </div>
 
@@ -127,7 +127,7 @@ export default function AddAgentModal({
                 name="role"
                 value={form.role}
                 onChange={handleChange}
-                className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                className="w-full mt-2 border border-[#e5e7eb] rounded-xl p-4 outline-none"
               >
                 <option value="">Select Role</option>
                 <option>Agent</option>
@@ -148,7 +148,7 @@ export default function AddAgentModal({
                 value={form.password}
                 onChange={handleChange}
                 placeholder="********"
-                className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                className="w-full mt-2 border border-[#e5e7eb] rounded-xl p-4 outline-none"
               />
             </div>
 
@@ -162,7 +162,7 @@ export default function AddAgentModal({
                 name="status"
                 value={form.status}
                 onChange={handleChange}
-                className="w-full mt-2 border rounded-xl p-4 outline-none focus:border-black"
+                className="w-full mt-2 border border-[#e5e7eb] rounded-xl p-4 outline-none"
               >
                 <option>Active</option>
                 <option>Inactive</option>
