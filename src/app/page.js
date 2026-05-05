@@ -9,12 +9,12 @@ export default function Home() {
     <div className="text-[#374151] mt-14 bg-[#F8F9FA]">
 
       {/* HERO SECTION */}
-      <section className="bg-[#2C3E50] text-white py-20 px-6 text-center">
+      <section className=" bg-[linear-gradient(to_right,#2C3E50,rgba(0,0,0,0.7)),url('/hauz.jpg')] bg-cover bg-center text-white py-20 px-6 text-center h-[70vh] items-center justify-center ">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Find Your Dream Property
+          Find Your Dream Property 
         </h1>
         <p className="text-lg mb-6 text-gray-300">
-          Buy, Rent, or Sell properties with ease and confidence.
+          Buy, Rent, or Sell properties with ease and confidence.   
         </p>
 
         {/* SEARCH BAR */}
