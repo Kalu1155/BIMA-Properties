@@ -25,6 +25,7 @@ export default function Navbar() {
           <Link href="/properties" className="hover:text-[#E3F2FD]">Properties</Link>
           <Link href="/agent" className="hover:text-[#E3F2FD]">Agents</Link>
           <Link href="/contact" className="hover:text-[#E3F2FD]">Contact</Link>
+          <Link href="/Register" className="hover:text-[#E3F2FD]">Sign in/Register</Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -43,6 +44,7 @@ export default function Navbar() {
           <Link href="/properties">Properties</Link>
           <Link href="/agents">Agents</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/Register">Register</Link>
         </div>
       )}
     </nav>
