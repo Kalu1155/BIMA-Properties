@@ -44,7 +44,7 @@ export default function Home() {
 
           {/* CARD */}
           {[1,2,3].map((item) => (
-            <div key={item} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition">
+            <div key={item} className=" border border-[#e5e7eb] rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition">
               
               <div className="h-48 bg-gray-200"></div>
 
