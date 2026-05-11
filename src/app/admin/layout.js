@@ -64,6 +64,9 @@ export default function AdminLayout({ children }) {
   if (pathname === "/admin/login") {
     return children;
   }
+   if (pathname === "/admin/register") {
+    return children;
+  }
 
   return (
     <div className="flex bg-[#f4f7fa] min-h-screen">

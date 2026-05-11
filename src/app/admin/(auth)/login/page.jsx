@@ -1,127 +1,13 @@
-// "use client";
-
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-
-// export default function AdminLogin() {
-//   const router = useRouter();
-
-//   const [form, setForm] = useState({
-//     email: "",
-//     password: "",
-//   });
-
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
-
-//   const handleChange = (e) => {
-//     setForm({
-//       ...form,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError("");
-
-//     try {
-//       // 🔌 API ready (we will connect real backend later)
-//       const res = await fetch("http://property.reworkstaging.name.ng/v1/merchants", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(form),
-//       });
-
-//       const data = await res.json();
-
-//       if (!res.ok) {
-//         throw new Error(data.message || "Login failed");
-//       }
-
-//       // save token (future auth flow)
-//       localStorage.setItem("adminToken", data.token);
-
-//       router.push("/admin/dashboard");
-//     } catch (err) {
-//       setError(err.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen flex flex-col md:flex-row">
-
-//       {/* LEFT SIDE - BRAND */}
-//       <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center p-10">
-//         <div>
-//           <h1 className="text-4xl font-bold">Bima Properties</h1>
-//           <p className="mt-3 text-gray-300">
-//             Admin Control System — manage agents, properties & listings.
-//           </p>
-//         </div>
-//       </div>
-
-//       {/* RIGHT SIDE - FORM */}
-//       <div className="flex w-full md:w-1/2 items-center justify-center p-6">
-//         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-
-//           <h2 className="text-2xl font-bold mb-6">Admin Login</h2>
-
-//           {error && (
-//             <div className="bg-red-100 text-red-600 p-2 rounded mb-4 text-sm">
-//               {error}
-//             </div>
-//           )}
-
-//           <form onSubmit={handleLogin} className="space-y-4">
-
-//             <input
-//               type="email"
-//               name="email"
-//               placeholder="Email"
-//               value={form.email}
-//               onChange={handleChange}
-//               className="w-full border p-3 rounded"
-//               required
-//             />
-
-//             <input
-//               type="password"
-//               name="password"
-//               placeholder="Password"
-//               value={form.password}
-//               onChange={handleChange}
-//               className="w-full border p-3 rounded"
-//               required
-//             />
-
-//             <button
-//               type="submit"
-//               disabled={loading}
-//               className="w-full bg-black text-white p-3 rounded hover:opacity-80 transition"
-//             >
-//               {loading ? "Logging in..." : "Login"}
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-
-//     </div>
-//   );
-// }
-
-
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { loginMerchant } from "@/services/authService";
+import toast from "react-hot-toast";
 
 export default function AdminLogin() {
+
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -132,39 +18,73 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+
   };
 
   const handleLogin = async (e) => {
+
     e.preventDefault();
 
-    setLoading(true);
+    try {
 
-    setTimeout(() => {
-      // TEMP LOGIN
-      localStorage.setItem("adminToken", "bima-admin-token");
+      setLoading(true);
 
+      // API CALL
+      const data = await loginMerchant(form);
+
+      console.log(data);
+
+      // SAVE TOKEN
+      localStorage.setItem(
+        "adminToken",
+        data?.token
+      );
+
+      // SAVE MERCHANT
       localStorage.setItem(
         "merchant",
         JSON.stringify({
-          name: "Bima Properties",
-          email: form.email,
+          fullname: data?.merchant?.fullname,
+          companyName: data?.merchant?.companyName,
+          email: data?.merchant?.email,
         })
       );
 
+      toast.success("Login successful");
+
       router.push("/admin");
-    }, 1500);
+
+    } catch (err) {
+
+      console.log(err);
+
+      toast.error(
+        err?.response?.data?.message ||
+        "Invalid credentials"
+      );
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
   };
 
   return (
+
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
 
       {/* LEFT */}
-      <div className="hidden md:flex w-1/2 bg-[#2C3E50] text-[#E3F2FD]  items-center justify-center p-10">
+      <div className="hidden md:flex w-1/2 bg-[#2C3E50] text-[#E3F2FD] items-center justify-center p-10">
+
         <div className="max-w-md">
+
           <h1 className="text-5xl font-bold leading-tight">
             Bima Properties
           </h1>
@@ -172,11 +92,14 @@ export default function AdminLogin() {
           <p className="mt-5 text-gray-400 leading-relaxed">
             Control your properties, agents, analytics and listings from one intelligent dashboard.
           </p>
+
         </div>
+
       </div>
 
       {/* RIGHT */}
       <div className="flex w-full md:w-1/2 items-center justify-center p-6">
+
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
 
           <h2 className="text-3xl font-bold mb-2">
@@ -187,8 +110,12 @@ export default function AdminLogin() {
             Login to continue
           </p>
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form
+            onSubmit={handleLogin}
+            className="space-y-5"
+          >
 
+            {/* EMAIL */}
             <input
               type="email"
               name="email"
@@ -199,6 +126,7 @@ export default function AdminLogin() {
               required
             />
 
+            {/* PASSWORD */}
             <input
               type="password"
               name="password"
@@ -209,18 +137,41 @@ export default function AdminLogin() {
               required
             />
 
+            {/* BUTTON */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#3f5873] text-white p-4 rounded-xl hover:opacity-90 transition-all duration-300"
+              className="w-full bg-[#3f5873] text-white p-4 rounded-xl hover:opacity-90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Authenticating..." : "Login"}
+
+              {loading
+                ? "Authenticating..."
+                : "Login"}
+
             </button>
 
           </form>
+
+          {/* REGISTER LINK */}
+          <p className="text-center text-gray-500 mt-6">
+
+            Don't have an account?
+
+            <Link
+              href="/admin/register"
+              className="text-black font-semibold ml-2 hover:underline"
+            >
+              Register
+            </Link>
+
+          </p>
+
         </div>
+
       </div>
 
     </div>
+
   );
+
 }
