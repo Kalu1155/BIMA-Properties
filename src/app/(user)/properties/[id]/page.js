@@ -1,73 +1,123 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState } from "react";
 
 export default function PropertyDetails({ params }) {
-  const resolvedParams = use(params);
-  const id = resolvedParams.id;
+  const id = params.id;
 
   const [property, setProperty] = useState(null);
   const [showForm, setShowForm] = useState(false);
+
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [message, setMessage] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
+  // ✅ Fetch Property
   useEffect(() => {
-    const dummyProperties = [
-      {
-        _id: "1",
-        name: "Test House",
-        city: "Abuja",
-        price: "5000000",
-        description: "A beautiful house in Abuja",
-        images: ["https://via.placeholder.com/600"],
-        bedroom: 3,
-        bathroom: 2,
-      },
-      {
-        _id: "2",
-        name: "Luxury Apartment",
-        city: "Lagos",
-        price: "12000000",
-        description: "Luxury apartment in Lagos",
-        images: ["https://via.placeholder.com/600"],
-        bedroom: 4,
-        bathroom: 3,
-      },
-    ];
-
-    const foundProperty = dummyProperties.find(
-      (item) => item._id === id
-    );
-
-    setProperty(foundProperty);
+    fetchProperty();
   }, [id]);
 
-  function handleBooking() {
+  async function fetchProperty() {
+    try {
+      const tokenRes = await fetch(
+        "http://property.reworkstaging.name.ng/v1/token",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: "test@gmail.com",
+          }),
+        }
+      );
+
+      const tokenData = await tokenRes.json();
+
+      const res = await fetch(
+        `http://property.reworkstaging.name.ng/v1/properties/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenData.token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+      console.log("PROPERTY:", data);
+
+      setProperty(data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // ✅ Handle Booking
+  async function handleBooking() {
     if (!date || !time) {
       alert("Please select date and time");
       return;
     }
 
-    console.log({
-      property_id: property._id,
-      date,
-      time,
-      message,
-    });
+    setLoading(true);
 
-    alert("Appointment booked (demo)");
+    try {
+      const tokenRes = await fetch(
+        "http://property.reworkstaging.name.ng/v1/token",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: "test@gmail.com",
+          }),
+        }
+      );
 
-    setDate("");
-    setTime("");
-    setMessage("");
-    setShowForm(false);
+      const tokenData = await tokenRes.json();
+
+      const res = await fetch(
+        "http://property.reworkstaging.name.ng/v1/bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenData.token}`,
+          },
+          body: JSON.stringify({
+            property_id: property._id,
+            date,
+            time,
+            message,
+          }),
+        }
+      );
+
+      const data = await res.json();
+      console.log("BOOKING:", data);
+
+      alert("Booking successful!");
+
+      // reset form
+      setDate("");
+      setTime("");
+      setMessage("");
+      setShowForm(false);
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
+
+    setLoading(false);
   }
 
-  if (!property) return <p>Loading...</p>;
+  if (!property) return <p style={{ padding: "20px" }}>Loading...</p>;
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
       <h1>{property.name}</h1>
 
       <img
@@ -77,6 +127,7 @@ export default function PropertyDetails({ params }) {
           width: "100%",
           height: "300px",
           objectFit: "cover",
+          borderRadius: "10px",
         }}
       />
 
@@ -92,52 +143,77 @@ export default function PropertyDetails({ params }) {
         onClick={() => setShowForm(!showForm)}
         style={{
           marginTop: "20px",
-          padding: "10px",
-          background: "black",
+          padding: "12px 16px",
+          background: "#2C3E50",
           color: "white",
           border: "none",
+          borderRadius: "6px",
           cursor: "pointer",
         }}
       >
-        Book Appointment
+        Schedule Property Tour
       </button>
 
-      {/* ✅ FORM */}
+      {/* ✅ BOOKING FORM */}
       {showForm && (
         <div style={{ marginTop: "20px" }}>
-          <h3>Book Appointment</h3>
+          <h3>Schedule a Visit</h3>
+
+          <p style={{ color: "gray", fontSize: "14px" }}>
+            Choose a convenient date and time to visit this property
+          </p>
 
           <input
             type="date"
             value={date}
+            min={new Date().toISOString().split("T")[0]}
             onChange={(e) => setDate(e.target.value)}
-            style={{ display: "block", marginBottom: "10px" }}
+            style={{
+              display: "block",
+              marginTop: "10px",
+              marginBottom: "10px",
+              padding: "8px",
+              width: "100%",
+            }}
           />
 
           <input
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
-            style={{ display: "block", marginBottom: "10px" }}
+            style={{
+              display: "block",
+              marginBottom: "10px",
+              padding: "8px",
+              width: "100%",
+            }}
           />
 
           <textarea
-            placeholder="Message"
+            placeholder="Message (optional)"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            style={{ display: "block", marginBottom: "10px" }}
+            style={{
+              display: "block",
+              marginBottom: "10px",
+              padding: "8px",
+              width: "100%",
+            }}
           />
 
           <button
             onClick={handleBooking}
+            disabled={loading}
             style={{
               padding: "10px",
-              background: "green",
+              background: loading ? "gray" : "green",
               color: "white",
               border: "none",
+              cursor: "pointer",
+              width: "100%",
             }}
           >
-            Submit
+            {loading ? "Booking..." : "Confirm Booking"}
           </button>
         </div>
       )}

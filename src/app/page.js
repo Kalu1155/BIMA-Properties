@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -44,7 +44,7 @@ export default function Home() {
             {["Buy Property", "Rent Property", "Lease Property"].map((item) => (
               <div
                 key={item}
-                className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+                className="bg-white p-6 rounded-xl  hover:shadow-sm transition"
               >
                 <h3 className="font-semibold text-lg">{item}</h3>
                 <p className="text-sm mt-2 text-gray-500">
@@ -65,7 +65,7 @@ export default function Home() {
             {[1, 2, 3].map((item) => (
               <div
                 key={item}
-                className=" rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition"
+                className=" rounded-lg overflow-hidden  hover:shadow-sm transition"
               >
                 {/* IMAGE */}
                 <Image
@@ -82,10 +82,11 @@ export default function Home() {
                   <p className="mt-2 font-bold text-[#2C3E50]">
                     ₦120,000,000
                   </p>
-
-                  <button className="mt-4 w-full bg-[#E3F2FD] bg-lime-200 text-[#2C3E50] font-semibold py-2 rounded-md hover:bg-lime-100">
+                  <Link href={`/properties/${item}`}>
+                  <button className="mt-4 w-full bg-[#E3F2FD] bg-lime-200 text-[#2C3E50] font-semibold py-2 rounded-md hover:bg-lime-100 cursor-pointer">
                     View Details
                   </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -165,12 +166,12 @@ export default function Home() {
     {[1, 2, 3].map((item) => (
       <div
         key={item}
-        className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+        className="bg-white p-6 rounded-xl  hover:shadow-sm transition"
       >
         {/* USER INFO */}
         <div className="flex items-center gap-4 mb-4">
           <div className="w-12 h-12 rounded-full bg-[#E3F2FD] flex items-center justify-center font-bold text-[#2C3E50]">
-            DB
+            AM
           </div>
           <div>
             <h4 className="font-semibold">Abdul Malik</h4>
@@ -185,7 +186,7 @@ export default function Home() {
         </p>
 
         {/* RATING */}
-        <div className="flex mt-4 text-yellow-400">
+        <div className="flex mt-4 text-[#2C3E50]">
           {"★★★★★"}
         </div>
       </div>
